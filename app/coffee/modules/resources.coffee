@@ -30,6 +30,7 @@ urls = {
     "permissions": "/permissions"
     "roles": "/roles"
     "projects": "/projects"
+    "bulk-update-projects-order": "/projects/bulk_update_order"
     "memberships": "/memberships"
     "notify-policies": "/notify-policies"
     "bulk-create-memberships": "/memberships/bulk_create"
