@@ -292,6 +292,7 @@ modules = [
     "taigaIntegrations",
     "taigaComponents",
     "taigaProfile",
+    "taigaHome",
 
     # template cache
     "templates",
