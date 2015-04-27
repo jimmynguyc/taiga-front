@@ -101,7 +101,7 @@ module.controller("ProjectProfileController", ProjectProfileController)
 ## Project Profile Directive
 #############################################################################
 
-ProjectProfileDirective = ($repo, $confirm, $loading, $navurls, $location) ->
+ProjectProfileDirective = ($repo, $confirm, $loading, $navurls, $location, projectsService) ->
     link = ($scope, $el, $attrs) ->
         form = $el.find("form").checksley({"onlyOneErrorElement": true})
         submit = debounce 2000, (event) =>
@@ -118,6 +118,7 @@ ProjectProfileDirective = ($repo, $confirm, $loading, $navurls, $location) ->
                 newUrl = $navurls.resolve("project-admin-project-profile-details", {project: $scope.project.slug})
                 $location.path(newUrl)
                 $scope.$emit("project:loaded", $scope.project)
+                projectsService.fetchProjects()
 
             promise.then null, (data) ->
                 $loading.finish(target)
@@ -131,7 +132,7 @@ ProjectProfileDirective = ($repo, $confirm, $loading, $navurls, $location) ->
 
     return {link:link}
 
-module.directive("tgProjectProfile", ["$tgRepo", "$tgConfirm", "$tgLoading", "$tgNavUrls", "$tgLocation", ProjectProfileDirective])
+module.directive("tgProjectProfile", ["$tgRepo", "$tgConfirm", "$tgLoading", "$tgNavUrls", "$tgLocation", "tgProjects", ProjectProfileDirective])
 
 #############################################################################
 ## Project Default Values Directive
