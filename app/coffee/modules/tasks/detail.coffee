@@ -167,7 +167,6 @@ TaskStatusDisplayDirective = ($template, $compile) ->
             })
 
             html = $compile(html)($scope)
-
             $el.html(html)
 
         $scope.$watch $attrs.ngModel, (task) ->
@@ -189,7 +188,7 @@ module.directive("tgTaskStatusDisplay", ["$tgTemplate", "$compile", TaskStatusDi
 ## Task status button directive
 #############################################################################
 
-TaskStatusButtonDirective = ($rootScope, $repo, $confirm, $loading, $qqueue, $translate) ->
+TaskStatusButtonDirective = ($rootScope, $repo, $confirm, $loading, $qqueue, $translate, $compile) ->
     # Display the status of Task and you can edit it.
     #
     # Example:
@@ -281,8 +280,8 @@ TaskStatusButtonDirective = ($rootScope, $repo, $confirm, $loading, $qqueue, $tr
         require: "ngModel"
     }
 
-module.directive("tgTaskStatusButton", ["$rootScope", "$tgRepo", "$tgConfirm", "$tgLoading", "$tgQqueue", "$translate",
-                                        TaskStatusButtonDirective])
+module.directive("tgTaskStatusButton", ["$rootScope", "$tgRepo", "$tgConfirm",
+    "$tgLoading", "$tgQqueue", "$translate", "$compile", TaskStatusButtonDirective])
 
 
 TaskIsIocaineButtonDirective = ($rootscope, $tgrepo, $confirm, $loading, $qqueue) ->
