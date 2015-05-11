@@ -307,6 +307,7 @@ modules = [
     "taigaBase",
     "taigaCommon",
     "taigaResources",
+    "taigaResources2",
     "taigaAuth",
     "taigaEvents",
 
