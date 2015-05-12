@@ -343,9 +343,11 @@ modules = [
     "taigaPlugins",
     "taigaIntegrations",
     "taigaComponents",
+    # new modules
     "taigaProfile",
     "taigaHome",
     "taigaPage",
+    "taigaUserTimeline",
 
     # template cache
     "templates",

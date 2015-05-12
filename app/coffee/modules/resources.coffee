@@ -178,7 +178,6 @@ module.run([
     "$tgWebhooksResourcesProvider",
     "$tgWebhookLogsResourcesProvider",
     "$tgLocalesResourcesProvider",
-    "$tgTimelineResourcesProvider",
     "$tgUsersResourcesProvider",
     initResources
 ])
