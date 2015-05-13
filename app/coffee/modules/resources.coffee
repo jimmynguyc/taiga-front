@@ -91,6 +91,7 @@ urls = {
     "webhooklogs": "/webhooklogs"
     "webhooklogs-resend": "/webhooklogs/%s/resend",
     "timeline-profile": "/timeline/profile",
+    "timeline-project": "/timeline/project",
 
     # History
     "history/us": "/history/userstory"
