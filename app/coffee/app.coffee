@@ -39,7 +39,7 @@ taiga.sessionId = taiga.generateUniqueSessionIdentifier()
 configure = ($routeProvider, $locationProvider, $httpProvider, $provide, $tgEventsProvider, tgLoaderProvider, $compileProvider, $translateProvider) ->
     $routeProvider.when("/",
         {
-            templateUrl: "home/home-page.html",
+            templateUrl: "home/home.html",
             access: {
                 requiresLogin: true
             },
@@ -314,6 +314,10 @@ init = ($log, $rootscope, $auth, $events, $analytics, $translate, $location, $na
     $log.debug("Initialize application")
     $rootscope.contribPlugins = @.taigaContribPlugins
     $rootscope.adminPlugins = _.where(@.taigaContribPlugins, {"type": "admin"})
+
+    # bluebird
+    Promise.setScheduler (cb) ->
+        $rootscope.$evalAsync(cb)
 
     if $auth.isAuthenticated()
         $events.setupConnection()

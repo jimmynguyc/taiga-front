@@ -34,15 +34,21 @@ class AuthService extends taiga.Service
                  "$tgModel",
                  "$tgResources",
                  "$tgHttp",
-                 "$tgUrls"]
+                 "$tgUrls",
+                 "tgCurrentUserService"]
 
-    constructor: (@rootscope, @storage, @model, @rs, @http, @urls) ->
+    constructor: (@rootscope, @storage, @model, @rs, @http, @urls, @currentUserService) ->
         super()
         userModel = @.getUser()
         @.setUserdata(userModel)
 
     setUserdata: (userModel) ->
-        @.userData = Immutable.fromJS(userModel.getAttrs())
+        if userModel
+            @.userData = Immutable.fromJS(userModel.getAttrs())
+            @currentUserService.setUser(@.userData)
+        else
+            @.userData = null
+
 
     getUser: ->
         if @rootscope.user
@@ -60,6 +66,7 @@ class AuthService extends taiga.Service
         @rootscope.auth = user
         @storage.set("userInfo", user.getAttrs())
         @rootscope.user = user
+
         @.setUserdata(user)
 
     clear: ->
