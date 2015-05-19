@@ -249,12 +249,22 @@ configure = ($routeProvider, $locationProvider, $httpProvider, $provide, $tgEven
     $httpProvider.interceptors.push("authHttpIntercept")
 
 
-    loaderIntercept = (loaderService) ->
+    loaderIntercept = ($q, loaderService) ->
         return {
             request: (config) ->
                 loaderService.logRequest()
 
                 return config
+
+            requestError: (rejection) ->
+                loaderService.logResponse()
+
+                return $q.reject(rejection)
+
+            responseError: (rejection) ->
+                loaderService.logResponse()
+
+                return $q.reject(rejection)
 
             response: (response) ->
                 loaderService.logResponse()
@@ -263,7 +273,7 @@ configure = ($routeProvider, $locationProvider, $httpProvider, $provide, $tgEven
         }
 
 
-    $provide.factory("loaderIntercept", ["tgLoader", loaderIntercept])
+    $provide.factory("loaderIntercept", ["$q", "tgLoader", loaderIntercept])
 
     $httpProvider.interceptors.push("loaderIntercept")
 
