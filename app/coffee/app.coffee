@@ -80,81 +80,200 @@ configure = ($routeProvider, $locationProvider, $httpProvider, $provide, $tgEven
     )
 
     $routeProvider.when("/project/:pslug/search",
-        {templateUrl: "search/search.html", reloadOnSearch: false})
+        {
+            templateUrl: "search/search.html",
+            reloadOnSearch: false,
+            section: "search"
+        }
+    )
 
     $routeProvider.when("/project/:pslug/backlog",
-        {templateUrl: "backlog/backlog.html", resolve: {loader: tgLoaderProvider.add()}})
+        {
+            templateUrl: "backlog/backlog.html",
+            resolve: {loader: tgLoaderProvider.add()},
+            section: "backlog"
+        }
+    )
 
     $routeProvider.when("/project/:pslug/kanban",
-        {templateUrl: "kanban/kanban.html", resolve: {loader: tgLoaderProvider.add()}})
+        {
+            templateUrl: "kanban/kanban.html",
+            resolve: {loader: tgLoaderProvider.add()},
+            section: "kanban"
+        }
+    )
 
     # Milestone
     $routeProvider.when("/project/:pslug/taskboard/:sslug",
-        {templateUrl: "taskboard/taskboard.html", resolve: {loader: tgLoaderProvider.add()}})
+        {
+            templateUrl: "taskboard/taskboard.html",
+            resolve: {loader: tgLoaderProvider.add()},
+            section: "backlog"
+        }
+    )
 
     # User stories
     $routeProvider.when("/project/:pslug/us/:usref",
-        {templateUrl: "us/us-detail.html", resolve: {loader: tgLoaderProvider.add()}})
+        {
+            templateUrl: "us/us-detail.html",
+            resolve: {loader: tgLoaderProvider.add()},
+            section: "backlog-kanban"
+        }
+    )
 
     # Tasks
     $routeProvider.when("/project/:pslug/task/:taskref",
-        {templateUrl: "task/task-detail.html", resolve: {loader: tgLoaderProvider.add()}})
+        {
+            templateUrl: "task/task-detail.html",
+            resolve: {loader: tgLoaderProvider.add()},
+            section: "backlog-kanban"
+        }
+    )
 
     # Wiki
     $routeProvider.when("/project/:pslug/wiki",
         {redirectTo: (params) -> "/project/#{params.pslug}/wiki/home"}, )
     $routeProvider.when("/project/:pslug/wiki/:slug",
-        {templateUrl: "wiki/wiki.html", resolve: {loader: tgLoaderProvider.add()}})
+        {
+            templateUrl: "wiki/wiki.html",
+            resolve: {loader: tgLoaderProvider.add()},
+            section: "wiki"
+        }
+    )
 
     # Team
     $routeProvider.when("/project/:pslug/team",
-        {templateUrl: "team/team.html", resolve: {loader: tgLoaderProvider.add()}})
+        {
+            templateUrl: "team/team.html",
+            resolve: {loader: tgLoaderProvider.add()},
+            section: "team"
+        }
+    )
 
     # Issues
     $routeProvider.when("/project/:pslug/issues",
-        {templateUrl: "issue/issues.html", resolve: {loader: tgLoaderProvider.add()}})
+        {
+            templateUrl: "issue/issues.html",
+            resolve: {loader: tgLoaderProvider.add()},
+            section: "issues"
+        }
+    )
     $routeProvider.when("/project/:pslug/issue/:issueref",
-        {templateUrl: "issue/issues-detail.html", resolve: {loader: tgLoaderProvider.add()}})
+        {
+            templateUrl: "issue/issues-detail.html",
+            resolve: {loader: tgLoaderProvider.add()},
+            section: "issues"
+        }
+    )
 
     # Admin - Project Profile
     $routeProvider.when("/project/:pslug/admin/project-profile/details",
-        {templateUrl: "admin/admin-project-profile.html"})
+        {
+            templateUrl: "admin/admin-project-profile.html",
+            section: "admin"
+        }
+    )
     $routeProvider.when("/project/:pslug/admin/project-profile/default-values",
-        {templateUrl: "admin/admin-project-default-values.html"})
+        {
+            templateUrl: "admin/admin-project-default-values.html",
+            section: "admin"
+        }
+    )
     $routeProvider.when("/project/:pslug/admin/project-profile/modules",
-        {templateUrl: "admin/admin-project-modules.html"})
+        {
+            templateUrl: "admin/admin-project-modules.html",
+            section: "admin"
+        }
+    )
     $routeProvider.when("/project/:pslug/admin/project-profile/export",
-        {templateUrl: "admin/admin-project-export.html"})
+        {
+            templateUrl: "admin/admin-project-export.html",
+            section: "admin"
+        }
+    )
     $routeProvider.when("/project/:pslug/admin/project-profile/reports",
-        {templateUrl: "admin/admin-project-reports.html"})
+        {
+            templateUrl: "admin/admin-project-reports.html",
+            section: "admin"
+        }
+    )
 
     $routeProvider.when("/project/:pslug/admin/project-values/status",
-        {templateUrl: "admin/admin-project-values-status.html"})
+        {
+            templateUrl: "admin/admin-project-values-status.html",
+            section: "admin"
+        }
+    )
     $routeProvider.when("/project/:pslug/admin/project-values/points",
-        {templateUrl: "admin/admin-project-values-points.html"})
+        {
+            templateUrl: "admin/admin-project-values-points.html",
+            section: "admin"
+        }
+    )
     $routeProvider.when("/project/:pslug/admin/project-values/priorities",
-        {templateUrl: "admin/admin-project-values-priorities.html"})
+        {
+            templateUrl: "admin/admin-project-values-priorities.html",
+            section: "admin"
+        }
+    )
     $routeProvider.when("/project/:pslug/admin/project-values/severities",
-        {templateUrl: "admin/admin-project-values-severities.html"})
+        {
+            templateUrl: "admin/admin-project-values-severities.html",
+            section: "admin"
+        }
+    )
     $routeProvider.when("/project/:pslug/admin/project-values/types",
-        {templateUrl: "admin/admin-project-values-types.html"})
+        {
+            templateUrl: "admin/admin-project-values-types.html",
+            section: "admin"
+        }
+    )
     $routeProvider.when("/project/:pslug/admin/project-values/custom-fields",
-        {templateUrl: "admin/admin-project-values-custom-fields.html"})
+        {
+            templateUrl: "admin/admin-project-values-custom-fields.html",
+            section: "admin"
+        }
+    )
 
     $routeProvider.when("/project/:pslug/admin/memberships",
-        {templateUrl: "admin/admin-memberships.html"})
+        {
+            templateUrl: "admin/admin-memberships.html",
+            section: "admin"
+        }
+    )
     # Admin - Roles
     $routeProvider.when("/project/:pslug/admin/roles",
-        {templateUrl: "admin/admin-roles.html"})
+        {
+            templateUrl: "admin/admin-roles.html",
+            section: "backlog-kanban"
+        }
+    )
+
     # Admin - Third Parties
     $routeProvider.when("/project/:pslug/admin/third-parties/webhooks",
-        {templateUrl: "admin/admin-third-parties-webhooks.html"})
+        {
+            templateUrl: "admin/admin-third-parties-webhooks.html",
+            section: "admin"
+        }
+    )
     $routeProvider.when("/project/:pslug/admin/third-parties/github",
-        {templateUrl: "admin/admin-third-parties-github.html"})
+        {
+            templateUrl: "admin/admin-third-parties-github.html",
+            section: "admin"
+        }
+    )
     $routeProvider.when("/project/:pslug/admin/third-parties/gitlab",
-        {templateUrl: "admin/admin-third-parties-gitlab.html"})
+        {
+            templateUrl: "admin/admin-third-parties-gitlab.html",
+            section: "admin"
+        }
+    )
     $routeProvider.when("/project/:pslug/admin/third-parties/bitbucket",
-        {templateUrl: "admin/admin-third-parties-bitbucket.html"})
+        {
+            templateUrl: "admin/admin-third-parties-bitbucket.html",
+            section: "admin"
+        }
+    )
     # Admin - Contrib Plugins
     $routeProvider.when("/project/:pslug/admin/contrib/:plugin",
         {templateUrl: "contrib/main.html"})
@@ -320,7 +439,7 @@ configure = ($routeProvider, $locationProvider, $httpProvider, $provide, $tgEven
         $translateProvider.fallbackLanguage([window.taigaConfig.defaultLanguage || "en"])
 
 
-init = ($log, $rootscope, $auth, $events, $analytics, $translate, $location, $navUrls, $appTitle) ->
+init = ($log, $rootscope, $auth, $events, $analytics, $translate, $location, $navUrls, $appTitle, projectService) ->
     $log.debug("Initialize application")
     $rootscope.contribPlugins = @.taigaContribPlugins
     $rootscope.adminPlugins = _.where(@.taigaContribPlugins, {"type": "admin"})
@@ -342,6 +461,12 @@ init = ($log, $rootscope, $auth, $events, $analytics, $translate, $location, $na
         if next.access && next.access.requiresLogin
             if !$auth.isAuthenticated()
                 $location.path($navUrls.resolve("login"))
+
+        if next.section
+            projectService.setSection(next.section)
+
+        if next.params.pslug
+            projectService.setProject(next.params.pslug)
 
         if next.title
             $translate(next.title).then (text) => $appTitle.set(text)
@@ -370,7 +495,6 @@ modules = [
     "taigaWiki",
     "taigaSearch",
     "taigaAdmin",
-    "taigaNavMenu",
     "taigaProject",
     "taigaUserSettings",
     "taigaFeedback",
@@ -418,5 +542,6 @@ module.run([
     "$tgLocation",
     "$tgNavUrls",
     "$appTitle",
+    "tgProjectService",
     init
 ])
