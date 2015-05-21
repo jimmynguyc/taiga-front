@@ -44,12 +44,11 @@ class UserStoryDetailController extends mixOf(taiga.Controller, taiga.PageMixin)
         "$log",
         "$appTitle",
         "$tgNavUrls",
-        "$tgAnalytics",
-        "tgLoader"
+        "$tgAnalytics"
     ]
 
     constructor: (@scope, @rootscope, @repo, @confirm, @rs, @params, @q, @location,
-                  @log, @appTitle, @navUrls, @analytics, tgLoader) ->
+                  @log, @appTitle, @navUrls, @analytics) ->
         @scope.usRef = @params.usref
         @scope.sectionName = "User Story Details"
         @.initializeEventHandlers()
@@ -63,7 +62,6 @@ class UserStoryDetailController extends mixOf(taiga.Controller, taiga.PageMixin)
 
         # On Error
         promise.then null, @.onInitialDataError.bind(@)
-        promise.finally tgLoader.pageLoaded
 
     initializeEventHandlers: ->
         @scope.$on "related-tasks:update", =>

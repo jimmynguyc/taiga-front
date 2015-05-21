@@ -44,9 +44,7 @@ configure = ($routeProvider, $locationProvider, $httpProvider, $provide, $tgEven
                 requiresLogin: true
             },
             title: "PROJECT.WELCOME",
-            resolve: {
-                loader: tgLoaderProvider.add(true)
-            }
+            loader: true
         }
     )
 
@@ -57,9 +55,7 @@ configure = ($routeProvider, $locationProvider, $httpProvider, $provide, $tgEven
                 requiresLogin: true
             },
             title: "PROJECT.SECTION_PROJECTS",
-            resolve: {
-                loader: tgLoaderProvider.add(true)
-            },
+            loader: true,
             controller: "ProjectsListing",
             controllerAs: "vm"
         }
@@ -71,9 +67,7 @@ configure = ($routeProvider, $locationProvider, $httpProvider, $provide, $tgEven
             access: {
                 requiresLogin: true
             },
-            resolve: {
-                loader: tgLoaderProvider.add(true)
-            },
+            loader: true,
             controller: "Project",
             controllerAs: "vm"
         }
@@ -90,7 +84,7 @@ configure = ($routeProvider, $locationProvider, $httpProvider, $provide, $tgEven
     $routeProvider.when("/project/:pslug/backlog",
         {
             templateUrl: "backlog/backlog.html",
-            resolve: {loader: tgLoaderProvider.add()},
+            loader: true,
             section: "backlog"
         }
     )
@@ -98,7 +92,7 @@ configure = ($routeProvider, $locationProvider, $httpProvider, $provide, $tgEven
     $routeProvider.when("/project/:pslug/kanban",
         {
             templateUrl: "kanban/kanban.html",
-            resolve: {loader: tgLoaderProvider.add()},
+            loader: true,
             section: "kanban"
         }
     )
@@ -107,7 +101,7 @@ configure = ($routeProvider, $locationProvider, $httpProvider, $provide, $tgEven
     $routeProvider.when("/project/:pslug/taskboard/:sslug",
         {
             templateUrl: "taskboard/taskboard.html",
-            resolve: {loader: tgLoaderProvider.add()},
+            loader: true,
             section: "backlog"
         }
     )
@@ -116,7 +110,7 @@ configure = ($routeProvider, $locationProvider, $httpProvider, $provide, $tgEven
     $routeProvider.when("/project/:pslug/us/:usref",
         {
             templateUrl: "us/us-detail.html",
-            resolve: {loader: tgLoaderProvider.add()},
+            loader: true,
             section: "backlog-kanban"
         }
     )
@@ -125,7 +119,7 @@ configure = ($routeProvider, $locationProvider, $httpProvider, $provide, $tgEven
     $routeProvider.when("/project/:pslug/task/:taskref",
         {
             templateUrl: "task/task-detail.html",
-            resolve: {loader: tgLoaderProvider.add()},
+            loader: true,
             section: "backlog-kanban"
         }
     )
@@ -136,7 +130,7 @@ configure = ($routeProvider, $locationProvider, $httpProvider, $provide, $tgEven
     $routeProvider.when("/project/:pslug/wiki/:slug",
         {
             templateUrl: "wiki/wiki.html",
-            resolve: {loader: tgLoaderProvider.add()},
+            loader: true,
             section: "wiki"
         }
     )
@@ -145,7 +139,7 @@ configure = ($routeProvider, $locationProvider, $httpProvider, $provide, $tgEven
     $routeProvider.when("/project/:pslug/team",
         {
             templateUrl: "team/team.html",
-            resolve: {loader: tgLoaderProvider.add()},
+            loader: true,
             section: "team"
         }
     )
@@ -154,14 +148,14 @@ configure = ($routeProvider, $locationProvider, $httpProvider, $provide, $tgEven
     $routeProvider.when("/project/:pslug/issues",
         {
             templateUrl: "issue/issues.html",
-            resolve: {loader: tgLoaderProvider.add()},
+            loader: true,
             section: "issues"
         }
     )
     $routeProvider.when("/project/:pslug/issue/:issueref",
         {
             templateUrl: "issue/issues-detail.html",
-            resolve: {loader: tgLoaderProvider.add()},
+            loader: true,
             section: "issues"
         }
     )
@@ -294,9 +288,7 @@ configure = ($routeProvider, $locationProvider, $httpProvider, $provide, $tgEven
     $routeProvider.when("/profile",
         {
             templateUrl: "profile/profile.html",
-            resolve: {
-                loader: tgLoaderProvider.add(true)
-            },
+            loader: true,
             access: {
                 requiresLogin: true
             },
@@ -308,9 +300,7 @@ configure = ($routeProvider, $locationProvider, $httpProvider, $provide, $tgEven
     $routeProvider.when("/profile/:slug",
         {
             templateUrl: "profile/profile.html",
-            resolve: {
-                loader: tgLoaderProvider.add(true)
-            },
+            loader: true,
             controller: "Profile",
             controllerAs: "vm"
         }
@@ -450,7 +440,7 @@ configure = ($routeProvider, $locationProvider, $httpProvider, $provide, $tgEven
         $translateProvider.fallbackLanguage([window.taigaConfig.defaultLanguage || "en"])
 
 
-init = ($log, $rootscope, $auth, $events, $analytics, $translate, $location, $navUrls, $appTitle, projectService) ->
+init = ($log, $rootscope, $auth, $events, $analytics, $translate, $location, $navUrls, $appTitle, projectService, loaderService) ->
     $log.debug("Initialize application")
     $rootscope.contribPlugins = @.taigaContribPlugins
     $rootscope.adminPlugins = _.where(@.taigaContribPlugins, {"type": "admin"})
@@ -481,6 +471,9 @@ init = ($log, $rootscope, $auth, $events, $analytics, $translate, $location, $na
 
         if next.title
             $translate(next.title).then (text) => $appTitle.set(text)
+
+        if next.loader
+            loaderService.startWithAutoClose()
 
 modules = [
     # Main Global Modules
@@ -554,5 +547,6 @@ module.run([
     "$tgNavUrls",
     "$appTitle",
     "tgProjectService",
+    "tgLoader",
     init
 ])
