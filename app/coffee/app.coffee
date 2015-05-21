@@ -305,6 +305,17 @@ configure = ($routeProvider, $locationProvider, $httpProvider, $provide, $tgEven
         }
     )
 
+    $routeProvider.when("/profile/:slug",
+        {
+            templateUrl: "profile/profile.html",
+            resolve: {
+                loader: tgLoaderProvider.add(true)
+            },
+            controller: "Profile",
+            controllerAs: "vm"
+        }
+    )
+
     # Auth
     $routeProvider.when("/login",
         {templateUrl: "auth/login.html"})
